@@ -1,0 +1,1458 @@
+<!-- clone of decathlone.in -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>decathlon</title>
+    <style>
+      /* Nav BAR */
+
+      body {
+        position: relative;
+      }
+
+      .nav_bar {
+        display: flex;
+        height: auto;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        justify-content: space-evenly;
+        /* border: 1px solid black; */
+      }
+
+      .nav_bar > div:nth-child(n) {
+        margin: auto;
+        /* border: 1px solid black; */
+      }
+
+      .nav_bar > div:nth-child(1) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav_bar > div:nth-child(1) i {
+        font-size: 40px;
+      }
+
+      .nav_bar > div:nth-child(1) button {
+        border: none;
+        background-color: transparent;
+        outline: none;
+      }
+
+      .nav_bar > div:nth-child(1) > p {
+        margin-left: 7px;
+      }
+
+      .nav_bar > div:nth-child(2) > img {
+        margin-top: 4px;
+      }
+
+      .nav_bar > div:nth-child(3) > form {
+        position: relative;
+      }
+
+      .nav_bar > div:nth-child(3) > form > input {
+        color: black !important;
+        width: 600px;
+        height: 50px;
+        padding-left: 50px;
+        border-radius: 0px 3px 3px 0px;
+      }
+
+      .nav_bar > div:nth-child(3) > form > input::placeholder {
+        color: #21222a;
+      }
+
+      .nav_bar > div:nth-child(4) > div:nth-child(1),
+      .nav_bar > div:nth-child(5) > div:nth-child(1),
+      .nav_bar > div:nth-child(6) > div:nth-child(1) {
+        margin-left: 17px;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+
+        z-index: 105;
+        position: absolute;
+        top: 100px;
+        left: 25%;
+
+        width: 50%;
+        height: fit-content;
+        padding: 1.5%;
+        margin: auto;
+        /* border: 1px solid black; */
+
+        text-align: left;
+        background-color: white;
+      }
+
+      .card > div > div:nth-child(n + 2) {
+        border-top: 1px solid black;
+      }
+
+      .searchIcon {
+        position: absolute;
+        top: 10px;
+        left: 5px;
+        font-size: 25px;
+        color: grey;
+      }
+      #overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.5
+        ); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+      }
+
+      /* PINCODE PART */
+      .pin_bar {
+        display: flex;
+        height: auto;
+        width: 98vw;
+
+        padding: 10px 0px 10px 0px;
+        /* border: 1px solid black; */
+
+        justify-content: center;
+        background-color: #424353;
+        color: whitesmoke;
+      }
+
+      .pin_bar > div {
+        margin-top: 8px;
+      }
+
+      .pin_bar > button {
+        padding: 8px;
+        margin-left: 6px;
+
+        border-radius: 6px;
+        border-color: whitesmoke;
+
+        background-color: #424353;
+        color: whitesmoke;
+      }
+
+      /* SLIDESHOW PART */
+      .slide,
+      .slide1 {
+        width: 99vw;
+        height: 50vh;
+        /* border: 1px solid red; */
+      }
+      #image,
+      #image1 {
+        width: 100vw;
+        height: 100vh;
+        cursor: pointer;
+      }
+
+      #image > #next {
+        position: absolute;
+        top: 6%;
+        right: 0;
+        transform: translate(-50% -50%);
+        padding: 1% 1%;
+        border-radius: 10px;
+        transition: 0.6s ease;
+        user-select: none;
+        cursor: pointer;
+        background-color: #ffffff;
+        outline: none;
+      }
+      #prev {
+        position: absolute;
+        top: 6%;
+        left: 0;
+        transform: translate(50% -50%);
+        padding: 1% 1%;
+        border-radius: 10px;
+        transition: 0.6s ease;
+        user-select: none;
+        cursor: pointer;
+        background-color: #ffffff;
+        outline: none;
+      }
+      #prev:hover:no-button {
+        border: none;
+      }
+      #addcartbtn {
+        cursor: pointer;
+        transition: 0.6s ease;
+        border-radius: 10px;
+        margin: 0 0 0 30%;
+        padding: 5px 20px;
+        outline: none;
+      }
+      #addcartbtn:hover {
+        background-color: lightblue;
+      }
+      /* PROMISE PART */
+      .promise_container {
+        display: flex;
+        background-color: #f4f4f4;
+        width: 90vw;
+        margin: 5vh auto;
+        height: 15vh;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 5px;
+      }
+
+      /* CATEGORY AND OTHER PART */
+
+      .category,
+      .others,
+      .accessory,
+      .events,
+      #show-products {
+        display: flex;
+        gap: 2%;
+        width: 90vw;
+        height: 45vh;
+        margin: 5vh auto;
+        justify-content: space-around;
+        align-items: center;
+        /* border: 1px solid red; */
+      }
+      #show-products {
+        max-height: 90vh;
+        flex-direction: row;
+        /* flex-wrap: wrap; */
+      }
+      #sorting {
+        width: 90vw;
+        margin: 10vh auto 0 40vw;
+        font-size: 24px;
+        border: none;
+      }
+      #sort {
+        padding: 10px 100px;
+      }
+      .events {
+        margin-bottom: 10vh;
+      }
+
+      #cate1,
+      #cate2,
+      #cate3,
+      #cate4,
+      .other,
+      .other1,
+      .other2,
+      .products {
+        width: 45vh;
+        height: 45vh;
+        /* border: 1px solid black; */
+        border-radius: 10px;
+      }
+      #cate1 {
+        background: url("mens.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      #cate2 {
+        background: url("womens.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      #cate3 {
+        background: url("Electronics.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      #cate4 {
+        background: url("jewellery.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other:nth-child(1) {
+        background: url("./asset/carrom.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other:nth-child(2) {
+        background: url("./asset/indoor.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other:nth-child(3) {
+        background: url("./asset/table_tennis.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other:nth-child(4) {
+        background: url("./asset/dartboard.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other1:nth-child(1) {
+        background: url("./asset/support.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other1:nth-child(2) {
+        background: url("./asset/protien.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other1:nth-child(3) {
+        background: url("./asset/massagers.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other1:nth-child(4) {
+        background: url("./asset/bottles.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other2:nth-child(1) {
+        background: url("./asset/running.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other2:nth-child(2) {
+        background: url("./asset/trekking.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other2:nth-child(3) {
+        background: url("./asset/cycling.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .other2:nth-child(4) {
+        background: url("./asset/allsports.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      #cate1:hover,
+      #cate2:hover,
+      #cate3:hover,
+      #cate4:hover,
+      .other:hover,
+      .other1:hover,
+      .other2:hover {
+        cursor: pointer;
+        transform: scale(1.03);
+        font-size: 24px;
+      }
+
+      .products {
+        width: 42vh;
+        height: 45vh;
+        /* border: 1px solid black; */
+      }
+      #show-products {
+        margin: 10vh auto 15vh auto;
+      }
+      #cartdiv:hover {
+        transform: scale(1.02);
+      }
+
+      /* SUB CATEGORY PART */
+      .sub-cat {
+        display: flex;
+        gap: 2%;
+        width: 90%;
+        height: 13vh;
+        /* border: 1px solid red; */
+        margin: 5vh auto;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .subcat1 {
+        background-color: #ededed;
+        width: 25%;
+        height: 100%;
+        /* border: 1px solid black; */
+        align-items: center;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      /* SPORTY-STORY*/
+      .sporty-story {
+        width: 90vw;
+        height: 70vh;
+        margin: auto;
+        /* border: 1px solid red; */
+        display: grid;
+        gap: 2%;
+        grid-template: "a b" "a c" "a d";
+      }
+      .a {
+        grid-area: a;
+        height: 70vh;
+        /* border: 1px solid green; */
+        border-radius: 10px;
+        background: url("./asset/blog.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+      .b {
+        grid-area: b;
+        height: auto;
+        /* border: 1px solid green; */
+        border-radius: 10px;
+        background: url("./asset/20\ healthy.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+      .c {
+        grid-area: c;
+        height: auto;
+        /* border: 1px solid green; */
+        border-radius: 10px;
+        background: url("./asset/10\ tips.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+      .d {
+        grid-area: d;
+        height: auto;
+        /* border: 1px solid green; */
+        border-radius: 10px;
+        background: url("./asset/guidence.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      /* FOOTER PART */
+
+      .part1 {
+        display: flex;
+        /* background-color: #fff; */
+        /* width: 100%; */
+      }
+      .part1 .left-content {
+        flex-grow: 1;
+        flex-basis: 0%;
+        max-width: 75%;
+        padding-top: 10px;
+        padding-left: 40px;
+        height: auto;
+        /* position: sticky; */
+        z-index: 999;
+        top: 0;
+        font-family: "Roboto Condensed", sans-serif !important;
+        /* color: #424453; */
+        /* background: #f6f6f6; */
+        font-family: "Roboto Condensed", sans-serif !important;
+      }
+      /* right part starts here */
+      .part1 .right-content {
+        flex-grow: 1;
+        flex-basis: 0%;
+        max-width: 25%;
+        padding-top: 10px;
+        padding-right: 40px;
+      }
+      .our-promise {
+        background: #f4f4f4;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .our-promise h5 {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+      .our-promise > a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-size: 1rem;
+        color: #424453;
+      }
+      .our-promise img {
+        /* margin-top: 25px; */
+        max-width: 30px;
+        vertical-align: middle;
+        /* border-style: none; */
+        align-items: center;
+      }
+      .useful_links {
+        margin-top: 10px;
+      }
+      .our-promise span {
+        float: left;
+      }
+      .useful_links {
+        display: flex;
+        justify-content: space-between;
+      }
+      .useful_links h4 {
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .foot-links a {
+        width: 100%;
+        display: block;
+        line-height: 2;
+        color: #424453;
+        text-decoration: none;
+        font-size: 16px;
+      }
+      .secure_tran {
+        /* display: flex; */
+        margin-top: 50px;
+      }
+      .secure {
+        display: flex !important;
+        float: left;
+      }
+      .secure img {
+        max-width: 23px;
+      }
+      .secure_content {
+        margin-left: 15px;
+        font-size: 10px;
+        /* margin-top: 30px; */
+      }
+      .secure_content h6 {
+        font-weight: 600;
+        font-size: 7px;
+        /* float: left; */
+      }
+      .secure_content p {
+        color: #bbbbbb;
+        /* margin-top: 5px; */
+      }
+      .card-4 {
+        float: left;
+        display: flex;
+        margin-left: 20px;
+      }
+      .card {
+        /* width: 105px;
+    height: 87px; */
+        margin-top: 10px;
+        padding: 7px;
+        max-width: 100%;
+        height: auto;
+        /* margin-left: 10px; */
+      }
+      hr::before {
+        margin-top: 30px;
+      }
+      .site_map {
+        float: left;
+        margin-top: 25px;
+        margin-left: 40px;
+        box-sizing: border-box;
+      }
+      .site_map a {
+        font-size: 10px;
+        color: #424453;
+        padding: 8px 15px;
+        border-left: 1px solid #dee2e6 !important;
+        border-right: 1px solid #dee2e6 !important;
+        text-decoration: none;
+        /* margin-top: 20px; */
+      }
+      .decathlon {
+        float: right;
+        display: flex;
+        /* margin-top: -10px; */
+        margin-top: 30px;
+        font-size: 10px;
+        margin-left: 10px;
+      }
+      .decathlon p {
+        margin-top: 10px;
+      }
+      .countries {
+        text-align: center;
+        margin-left: 55px;
+        margin-top: -30px;
+        /* padding-bottom: 20px; */
+        position: relative;
+        cursor: pointer;
+      }
+      .countries .p-c {
+        border: 1px solid;
+        padding: 12px 12px;
+        border-radius: 3px;
+      }
+      .app {
+        background: #f4f4f4;
+        border-radius: 4px;
+        margin-top: 0;
+        padding: 10px 20px;
+        margin-left: 7px;
+      }
+      .app h6 {
+        /* margin-left: 10px; */
+        /* text-align: center; */
+        margin-top: -1px;
+        margin-top: 10px;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 10px;
+      }
+      .google_play {
+        display: flex;
+      }
+      .google_play a img {
+        max-width: 110px;
+        height: 36px;
+        width: 100%;
+        margin-right: 10px;
+      }
+      .follow {
+        background: #f4f4f4;
+        border-radius: 3px;
+        margin-top: 7px;
+        padding: 10px 20px;
+        margin-left: 10px;
+      }
+      .follow h6 {
+        /* margin-left: 10px; */
+        margin-top: 5px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .social_media {
+        display: flex;
+        justify-content: space-between;
+        /* margin-left: 10px; */
+      }
+      .social_media a {
+        background: #424453;
+        width: 25px;
+        height: 25px;
+        line-height: 2;
+        text-align: center;
+        border-radius: 3px;
+        padding: 3px;
+      }
+      .blog h6 {
+        margin-top: 20px;
+      }
+      .social_blog a {
+        /* width: 100%; */
+        display: block;
+        background: #fff;
+        text-align: center;
+        border-radius: 3px;
+        color: #424453;
+        padding: 12px;
+        text-decoration: none;
+      }
+      .explore h6 {
+        margin-top: 10px;
+      }
+      .part2 {
+        text-align: center;
+      }
+      .part2 h3 {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.75rem;
+      }
+      .sustain {
+        text-align: center;
+      }
+      .part2 p {
+        color: #0082c3;
+        font-size: 1.1rem;
+      }
+      .part2 p span {
+        color: #85bc4a;
+      }
+      .logo {
+        position: relative;
+      }
+      .logo img {
+        max-width: 900px;
+        margin: 1.2rem auto 1.7rem auto;
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .logo img::after {
+        /* background-image: url(images.png); */
+        content: "";
+        width: 200px;
+        height: 200px;
+        right: 180px;
+        position: absolute;
+        top: -130px;
+        background-size: 100%;
+        background-position: center;
+        transform: translatey(0px);
+        animation: float 6s ease-in-out infinite;
+      }
+      .logo p {
+        color: #424453;
+        font-size: 12px;
+      }
+      .foot_bottom .blue {
+        width: 100%;
+        height: 5px;
+        background: #0082c3;
+        display: block;
+        float: left;
+        max-width: 400px;
+        min-width: 400px;
+      }
+      .foot_bottom .orange {
+        width: 100%;
+        height: 5px;
+        background: #ec6607;
+        display: inline-block;
+        max-width: 200px;
+        min-width: 200px;
+        float: left;
+      }
+      .foot_bottom .green {
+        width: 100%;
+        height: 5px;
+        background: #85bc4a;
+        max-width: 150px;
+        min-width: 150px;
+        float: left;
+      }
+      /* .part2::after {
+        background-image: url(images.png);
+        content: "";
+        height: 200px;
+        width: 200px;
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        bottom: -20px;
+        z-index: 1;
+      } */
+      /* https://cdncontent.decathlon.in/_next/static/images/right-leaf-e1c4e49a470eee3c8b85a4708e0c2ba8.png */
+    </style>
+  </head>
+  <body>
+    <!-- NAV BAR -->
+    <div class="nav_bar">
+      <div>
+        <button style="cursor: pointer" onclick="displayNone()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <p>ALL<br />SPORTS</p>
+      </div>
+
+      <div style="cursor: pointer">
+        <img
+          src="https://cdncontent.decathlon.in/_next/static/images/logo-93d12d8cff484ab736d2a39f15bf66d8.svg"
+        />
+      </div>
+
+      <div>
+        <form>
+          <div class="searchIcon"><i class="fas fa-search"></i></div>
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Search 70 sports and 5000 products"
+          />
+        </form>
+      </div>
+
+      <div style="cursor: pointer">
+        <div>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNy44NzMiIGhlaWdodD0iMjIuNTE3IiB2aWV3Qm94PSIwIDAgMTcuODczIDIyLjUxNyI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzQyNDQ1Mzt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMykiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjAzKSI+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xNS41LDEwLjQyN0E0Ljk5MSw0Ljk5MSwwLDAsMSwxMC41Myw1LjIxNmE0Ljk3Miw0Ljk3MiwwLDEsMSw5LjkzMiwwQTQuOTgsNC45OCwwLDAsMSwxNS41LDEwLjQyN1ptMC04LjkyNmEzLjQ4LDMuNDgsMCwwLDAtMy40NzEsMy43MTUsMy40NzMsMy40NzMsMCwxLDAsNi45MywwQTMuNDc1LDMuNDc1LDAsMCwwLDE1LjUsMS41WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYuNTY4KSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNLjczMiw0MS42MjVBLjc1Ljc1LDAsMCwxLC4yLDQxLjQwN2EuNzUuNzUsMCwwLDEtLjIyMS0uNjcyTDEuODA5LDMxLjJhLjc1Ljc1LDAsMCwxLC43NS0uNjEySDE1LjcxNGEuNzUuNzUsMCwwLDEsLjc1LjU5M2wxLjM2Miw2LjM1NmEuNzUuNzUsMCwwLDEtLjU4OS44OTNMLjg3NSw0MS42MjVhLjU5My41OTMsMCwwLDEtLjE0MywwWm0yLjQzNS05LjUzNC0xLjUsNy44MzUsMTQuNTEzLTIuOC0xLjA3My01LjAzMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuMDMgLTE5LjExMikiLz48L2c+PC9nPjwvc3ZnPg=="
+          />
+        </div>
+        <a style="text-decoration: none" href="./login.html"
+          ><div>Account</div></a
+        >
+      </div>
+
+      <div style="cursor: pointer" id="myStore">
+        <div>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNy42MjIiIGhlaWdodD0iMTkuODQ3IiB2aWV3Qm94PSIwIDAgMTcuNjIyIDE5Ljg0NyI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzQyNDQ1Mzt9LmJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIj48cGF0aCBjbGFzcz0iYSIgZD0iTS42NjEsMTkuODQ1QS42NjEuNjYxLDAsMCwxLDAsMTkuMTgzVi42NjFBLjY2MS42NjEsMCwwLDEsLjY2MSwwaDE2LjNhLjY2MS42NjEsMCwwLDEsLjY2MS42NjFWMTYuMzUyYS42NjEuNjYxLDAsMCwxLS41NDkuNjYxTC43NzQsMTkuODQ1YS42NjIuNjYyLDAsMCwxLS4xMTIsMFpNMS4zMjMsMS4zMjNWMTguNEwxNi4zLDE1LjhWMS4zMjNaTTE2Ljk2MSwxNi4zNTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xNy40NTEsNDAuNTYzYS42NjEuNjYxLDAsMCwxLS42NjEtLjY2MXYtNi44NGEuNjYxLjY2MSwwLDAsMSwuNjYxLS42NjFoNS4xOTNhLjY2MS42NjEsMCwwLDEsLjY2MS42NjF2NS45NTNhLjY2MS42NjEsMCwwLDEtMS4zMjMsMFYzMy43MjNoLTMuODdWMzkuOUEuNjYxLjY2MSwwLDAsMSwxNy40NTEsNDAuNTYzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExLjIzNyAtMjEuNjg0KSIvPjxyZWN0IGNsYXNzPSJhIiB3aWR0aD0iMTIuMDUyIiBoZWlnaHQ9IjMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIuNzg1IDIuNjY5KSIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTQuODMsMTAuMjdoLjg4NnYuMzQxSDE1LjIzdi4yNTFoLjQydi4zMzFoLS40MnYuMjgxaC40ODZ2LjMzN0gxNC44M1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05LjkyNSAtNi44NzMpIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xOS4zNzIsMTAuMTg5cy0uNTEzLjg2Ny0uNTYyLjk0NmEuNDUzLjQ1MywwLDAsMS0uMzc3LjIzNUEuNC40LDAsMCwxLDE4LDEwLjk1NmEuNDEzLjQxMywwLDAsMSwuNDA3LS40MTMuNjYxLjY2MSwwLDAsMSwuNDU2LjI0MWwuMi0uMzMxYS44Mi44MiwwLDAsMC0uNjYxLS4zLjgxLjgxLDAsMCwwLS44MjQuNzk0Ljc5Ljc5LDAsMCwwLC43NDEuODEuODczLjg3MywwLDAsMCwuNzIxLS4yNThIMTkuNHYuMjMyaC4zODRWMTAuMTg5Wm0uMDQzLjk5MkgxOS4yMWwuMjA1LS4zNDdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEuNzY1IC02Ljc5MikiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI0LjgzOCwxMS44MTFWMTAuNjM3SDI0LjUzVjEwLjI3aDEuMDE1di4zNjdoLS4zMDh2MS4xNzRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTYuNDE3IC02Ljg3MykiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI4LjY2LDExLjIyM2gtLjQxM3YuNTg5aC0uNFYxMC4yN2guNHYuNTg1aC40MTNWMTAuMjdoLjR2MS41NDFoLS40WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE4LjYzOSAtNi44NzMpIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0zMS44NywxMS44MTFWMTAuMjdoLjM5NHYxLjJoLjQ2NnYuMzQxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIxLjMyOSAtNi44NzMpIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0zNC4wMTgsMTAuNGEuODIuODIsMCwwLDEsMS4xMzQsMCwuNzgxLjc4MSwwLDAsMSwuMjQxLjU2Ni44LjgsMCwwLDEtLjgwNy44QS43ODQuNzg0LDAsMCwxLDM0LDExLjUyNGEuODE0LjgxNCwwLDAsMS0uMjIyLS41NzUuNzY0Ljc2NCwwLDAsMSwuMjM4LS41NTltLjU2OS45OTJhLjQyNS40MjUsMCwxLDAtLjQtLjQyLjQzLjQzLDAsMCwwLC40MTMuNDMzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjIuNjA3IC02LjgwNykiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTM4LjU1LDExLjgxMVYxMC4yN2guMzYxbC42Ljg1N1YxMC4yN2guNHYxLjU0MWgtLjM1MWwtLjYwOS0uODZ2Ljg2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1LjggLTYuODczKSIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTAuNjIsMTEuOFYxMC4yNjFoLjU1OWEuODE3LjgxNywwLDAsMSwuNjA5LjE4NS44My44MywwLDAsMSwwLDEuMTY0LjcuNywwLDAsMS0uNTU2LjE5MlptMS4wMDktLjc3N2EuNC40LDAsMCwwLS40NS0uNDMzSDExLjAydi44NzNoLjE1OWMuMywwLC40NS0uMTM2LjQ1LS40NCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcuMTA3IC02Ljg2NCkiLz48L2c+PC9nPjwvc3ZnPg=="
+            alt="Stores"
+          />
+        </div>
+        <div style="cursor: pointer">My Store</div>
+      </div>
+
+      <div style="cursor: pointer" id="support">
+        <div>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOS40MiIgaGVpZ2h0PSIyMC4yODgiIHZpZXdCb3g9IjAgMCAxOS40MiAyMC4yODgiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiM0MjQ0NTM7fTwvc3R5bGU+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMC4wMjIpIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0wLjAyMikiPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTkuMTY3LjE1N2EuNzEyLjcxMiwwLDAsMC0uNTc2LS4xNzFsLTE4LDIuOTgyQS43MTIuNzEyLDAsMCwwLDAsMy42NzlWMTYuNTQ1YS43MTIuNzEyLDAsMCwwLC44MjkuNzEybDIuMzA5LS4zODF2Mi42NzlhLjcwOC43MDgsMCwwLDAsMS4xNzguNTM0bDQuODA3LTQuMjA5LDkuNy0xLjZhLjcxMi43MTIsMCwwLDAsLjYtLjcxMlYuN2EuNzEyLjcxMiwwLDAsMC0uMjUzLS41NDFaTTE4LDEyLjk2NSw4LjY4OSwxNC41MDZhLjczNi43MzYsMCwwLDAtLjM1Ni4xNjdMNC41NjEsMTcuOTg2VjE2LjAyOWEuNzExLjcxMSwwLDAsMC0uNzEyLS43MTJIMy43MzJsLTIuMzA5LjM5MVY0LjI3M0wxOCwxLjUzN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMC4wMjIpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik0yMC4yNjEsMjcuMDkzYTQuMDI4LDQuMDI4LDAsMCwwLC43NC0uMDY0LDQuMjcsNC4yNywwLDAsMCwzLjQ2NS0zLjUzNy41MzQuNTM0LDAsMCwwLTEuMDM5LS4xNDksMy4yLDMuMiwwLDAsMS01Ljk0MiwxLjA1LjUzNC41MzQsMCwxLDAtLjkzNi41MTYsNC4yNyw0LjI3LDAsMCwwLDMuNzExLDIuMTg1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEwLjYxOCAtMTQuNzk2KSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTguNjQsMTYuOWExLjAzMiwxLjAzMiwwLDEsMC0uNzc0LS4xNywxLjAzNSwxLjAzNSwwLDAsMCwuNzc0LjE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExLjIyNSAtOS41NTQpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik0zMC4xMTQsMTQuODhhMS4wMzUsMS4wMzUsMCwxLDAtLjc3Ni0uMTdBMS4wMzUsMS4wMzUsMCwwLDAsMzAuMTE0LDE0Ljg4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE4LjYxNCAtOC4yNTQpIi8+PC9nPjwvZz48L3N2Zz4="
+            alt="Help"
+          />
+        </div>
+        <div style="cursor: pointer">Support</div>
+      </div>
+
+      <div style="cursor: pointer">
+        <div>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNC4xNTUiIGhlaWdodD0iMjEuNDk5IiB2aWV3Qm94PSIwIDAgMjQuMTU1IDIxLjQ5OSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzQyNDQ1Mzt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSI+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xMy40MzEsMTguNWEuODExLjgxMSwwLDAsMS0uNzc1LS41NzZMOS4xODgsNi41NDFBLjgxNC44MTQsMCwwLDEsOS45NjcsNS40OUgyOC43ODVBLjgxMS44MTEsMCwwLDEsMjkuNiw2LjN2OC45MjRhLjgxMS44MTEsMCwwLDEtLjY4Ni44MTFMMTMuNTUzLDE4LjVaTTExLjA2Miw3LjExMywxNCwxNi43NzlsMTMuOTctMi4yNTVWNy4xMTNabTE3LjcyMyw4LjExM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01LjQ0MSAtMy4yNjMpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik0yMy43ODYsNDQuMDg1YTMuMDQyLDMuMDQyLDAsMSwxLDMuMDM4LTMuMDM4QTMuMDQyLDMuMDQyLDAsMCwxLDIzLjc4Niw0NC4wODVabTAtNC40NjJhMS40MiwxLjQyLDAsMSwwLDEuNDE2LDEuNDIsMS40MiwxLjQyLDAsMCwwLTEuNDE2LTEuNDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTIuMzI4IC0yMi41ODUpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik00NS43NTYsNDQuMDg1YTMuMDQyLDMuMDQyLDAsMSwxLDMuMDM4LTMuMDM4QTMuMDQyLDMuMDQyLDAsMCwxLDQ1Ljc1Niw0NC4wODVabTAtNC40NjJhMS40MiwxLjQyLDAsMSwwLDEuNDE2LDEuNDIsMS40MiwxLjQyLDAsMCwwLTEuNDE2LTEuNDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjUuMzg2IC0yMi41ODUpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik00LjYxOCw0LjE1YS44MTEuODExLDAsMCwxLS43NzEtLjU1NmwtLjU0LTEuNjIzTDEuMTc4LDMuMDIyQS44MTIuODEyLDAsMSwxLC40NTIsMS41N0wzLjQyMi4wODVBLjgxMS44MTEsMCwwLDEsNC41NTMuNTU2bC44MzYsMi41MzFBLjgxMS44MTEsMCwwLDEsNC42MTgsNC4xNVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjAwMyAwKSIvPjwvZz48L3N2Zz4="
+            alt="Cart"
+          />
+        </div>
+        <a style="text-decoration: none" href="./cart.html"
+          ><div style="cursor: pointer">Cart</div></a
+        >
+      </div>
+    </div>
+
+    <!-- <div id="overlay" onclick="off()">
+      <div class="card">
+        <h4 style="width: 100%; text-align: left">COLLECTIONS</h4>
+        <div id="displayData"></div>
+      </div>
+    </div> -->
+
+    <!-- PINOCDE PART -->
+
+    <div class="pin_bar">
+      <div>Delivering to <span>411014 Viman Nagar</span></div>
+      <button id="pincode_change">CHANGE</button>
+    </div>
+
+    <!-- SLIDESHOW PART -->
+    <div class="slide">
+      <div id="image">
+        <button id="prev" onclick="prev()">&#10094;</button>
+        <button id="next" onclick="next()">&#10095;</button>
+      </div>
+    </div>
+
+    <script>
+      var imgarr = [
+        "https://www.decathlon.in/_next/image?url=https%3A%2F%2Fcontents.mediadecathlon.com%2Fs853980%2Fk%2474855d9d9d5920b0ca50640b2b758e7c%2Fmain%2520banners%2520galaxy%2520to%2520galaxy%2520main%2520banner%2520desktop.jpg%3Ff%3D1920x470%26format%3Dauto&w=1920&q=75",
+        "https://www.decathlon.in/_next/image?url=https%3A%2F%2Fcontents.mediadecathlon.com%2Fs854092%2Fk%24db16dd1b2c47d6139c4e8f329d170cd0%2Flanding%2520page%2520desk.jpg%3Ff%3D1920x470%26format%3Dauto&w=1920&q=75",
+        "https://www.decathlon.in/_next/image?url=https%3A%2F%2Fcontents.mediadecathlon.com%2Fs850786%2Fk%2467d676e372b1ae68bdb939b59e71b541%2Fimgonline%2520com%2520ua%2520compresstosize%2520ko7nq6hefmgb0nc.jpg%3Ff%3D1920x470%26format%3Dauto&w=1920&q=75",
+        "https://www.decathlon.in/_next/image?url=https%3A%2F%2Fcontents.mediadecathlon.com%2Fs853979%2Fk%2442d76ebcd75e6b3a8a69081e62d80493%2Fsummer%2520desktop.jpg%3Ff%3D1920x470%26format%3Dauto&w=1920&q=75",
+      ]; // storing all images in array
+
+      var image = document.getElementById("image");
+
+      var img = document.createElement("img");
+      img.style.width = "98%";
+      img.style.height = "50%";
+      img.setAttribute("src", imgarr[0]); // showing initial image after  loading page first time
+      image.append(img);
+
+      var i = 0; // starting from 0th image
+      function next() {
+        i < imgarr.length - 1 ? i++ : (i = 0);
+
+        img.setAttribute("src", imgarr[i]);
+      } // applying coditions to move next image after clicking next button
+      function prev() {
+        i > 0 ? i-- : (i = array.length - 1);
+
+        img.setAttribute("src", imgarr[i]);
+      } // applying coditions to move previous image after clicking prev button
+
+      window.addEventListener("load", () => {
+        setInterval(() => {
+          i < imgarr.length - 1 ? i++ : (i = 0);
+          img.setAttribute("src", imgarr[i]);
+        }, 5000); // for automating sliding setting timer
+      });
+    </script>
+
+    <!-- OUR PROMISE PART -->
+    <div>
+      <div class="promise_container">
+        <div style="font-weight: bold; font-size: 20px">OUR PROMISE</div>
+        <div>
+          <img
+            src="https://contents.mediadecathlon.com/s810456/k$3d1c34a67fc4a7d2659a8f40f2f68cb7/Warranty.png?format=auto"
+            alt="Minimum 2 Years Warranty*"
+          />
+        </div>
+        <div style="margin-left: -50px">Minimum 2 Years Warranty*</div>
+        <div>
+          <img
+            src="https://contents.mediadecathlon.com/s810454/k$334b051efe821948949913a913e26079/free%20pick%20up.png?format=auto"
+            alt="Drive through/Free Pickup in Stores"
+          />
+        </div>
+        <div style="margin-left: -50px">
+          Drive through/Free Pickup in Stores
+        </div>
+        <div>
+          <img
+            src="https://contents.mediadecathlon.com/s810453/k$b01109de2bacb669e5db58aefa3c6ee9/Free%20delivery.png?format=auto"
+            alt="Home Delivery at Your Doorstep"
+          />
+        </div>
+        <div style="margin-left: -50px">Home Delivery at Your Doorstep</div>
+        <div>
+          <img
+            src="https://contents.mediadecathlon.com/s810455/k$5d275c8ba3f1f586032fc19f5bacf57f/90%20dats%20return.png?format=auto"
+            alt="Easy 90 Days Return"
+          />
+        </div>
+        <div style="margin-left: -50px">Easy 90 Days Return</div>
+      </div>
+    </div>
+
+    <!-- TRENDING PART -->
+
+    <!-- CATEGORY PART -->
+
+    <div class="category">
+      <div onclick="Men()" id="cate1" data-id="men"></div>
+      <div onclick="Women()" id="cate2" data-id="women"></div>
+      <div onclick="Electronics()" id="cate3" data-id="electronics"></div>
+      <div onclick="Jewelery()" id="cate4" data-id="jewelery"></div>
+    </div>
+
+    <!-- SORTING PART -->
+    <div id="sorting">
+      <select value="all" name="sort" id="sort">
+        <option value="all">all products</option>
+        <option value="low">low to high</option>
+        <option value="high">high to low</option>
+        <option value="accending">A to Z</option>
+        <option value="deccending">Z to A</option>
+      </select>
+    </div>
+
+    <!-- SHOWPRODUCT PART -->
+    <div id="show-products"></div>
+    <script>
+      const selectElem = document.getElementById("sort");
+      var showProductElem = document.getElementById("show-products");
+      var categories = document.querySelector(".category");
+
+      categories.addEventListener("click", (e) => {
+        const { dataset } = e.target;
+        console.log(dataset);
+        //let query = dataset.id;
+      });
+
+      window.addEventListener("load", function () {
+        Men();
+      }); // showing data after reloading of page
+      var mydata = JSON.parse(localStorage.getItem("mydata")) || []; // getting data from locastorage if available or storing data in it
+
+      function viewData(data) {
+        showProductElem.innerHTML = "";
+        //running foreach to run through all data of api and passing parameters to re use this function
+        data.forEach((el) => {
+          //console.log(el.price * 75);
+          var div = document.createElement("div");
+          div.innerHTML = `
+                <div id="myproduct" class="products" style="text-align:center; background:#F6F6F6; font-size: 18px;" >
+
+                    <img src="${
+                      el.image
+                    }" alt="" width="200px;" height="200px"> <br>
+                    <span> <span style="background:yellow;">₹ ${Math.floor(
+                      el.price * 75
+                    )}</span> <span style="margin-left:20px;"> MRP ₹ ${Math.floor(
+            el.price * 75 * 1.4
+          )}</span> </span> <br><br>
+            <span>Product ID: ${el.id}</span> <br>
+                    <span>${el.title}</span> <br>
+                   
+                    </div>
+             `; // using api data creating UI or showing it on web page
+          var btn = document.createElement("button");
+          btn.innerHTML = "ADD TO CART";
+          btn.setAttribute("id", "addcartbtn");
+          div.appendChild(btn);
+
+          div.style.width = "90vw";
+          div.style.margin = "auto";
+          div.style.background = "#F6F6F6";
+          div.setAttribute("id", "cartdiv");
+
+          showProductElem.append(div);
+
+          btn.addEventListener("click", function () {
+            Addcart(el);
+          });
+          function Addcart(el) {
+            console.log(el);
+            mydata.push(el);
+            localStorage.setItem("mydata", JSON.stringify(mydata)); // storing data to localStorage
+          }
+        });
+      }
+
+      //   Mens data
+      let products = null;
+
+      //sort functiion
+
+      selectElem.addEventListener("click", (e) => {
+        const { name, value } = e.target;
+        filter(products, value);
+      });
+
+      function filter(data, value) {
+        if (value == "low") {
+          data.sort((a, b) => {
+            return a.price - b.price;
+          });
+        } else if (value == "high") {
+          data.sort((a, b) => {
+            return b.price - a.price;
+          });
+        } else if (value == "accending") {
+          data.sort((a, b) => {
+            return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+          });
+        } else if (value == "deccending") {
+          data.sort((a, b) => {
+            return a.title < b.title ? 1 : b.title < a.title ? -1 : 0;
+          });
+        }
+
+        viewData(data);
+      }
+
+      async function Men() {
+        try {
+          var req = await (
+            await fetch(
+              "https://fakestoreapi.com/products/category/men clothing"
+            )
+          ).json(); // fetching data of women clothing from api
+          console.log(req);
+          products = req;
+          viewData(products); // passing function to show data on web page
+        } catch (e) {
+          console.log(e);
+        } // error handling
+      }
+
+      async function Women() {
+        try {
+          var req = await (
+            await fetch(
+              "https://fakestoreapi.com/products/category/women clothing"
+            )
+          ).json(); // fetching data of women clothing from api
+          console.log(req);
+          products = req;
+          viewData(products); // passing function to show data on web page
+        } catch (e) {
+          console.log(e);
+        } // error handling
+      }
+
+      async function Electronics() {
+        try {
+          var req = await (
+            await fetch(
+              "https://fakestoreapi.com/products/category/electronics"
+            )
+          ).json(); // fetching data of electronics from api
+          console.log(req);
+          products = req;
+          viewData(products); // passing function to show data on web page
+        } catch (e) {
+          console.log(e);
+        } // error handling
+      }
+
+      async function Jewelery() {
+        try {
+          var req = await (
+            await fetch("https://fakestoreapi.com/products/category/jewelery")
+          ).json(); // fetching data of jewelery from api
+          console.log(req);
+          products = req;
+          viewData(products); // passing function to show data on web page
+        } catch (e) {
+          console.log(e);
+        } // error handling
+      }
+    </script>
+
+    <!-- OTHER PART -->
+    <div class="others">
+      <div class="other"></div>
+      <div class="other"></div>
+      <div class="other"></div>
+      <div class="other"></div>
+    </div>
+
+    <!-- SLIDE SHOW2 PART -->
+
+    <div class="slide1">
+      <div id="image1"></div>
+    </div>
+
+    <script>
+      var imgarr1 = [
+        "https://www.decathlon.in/_next/image?url=https%3A%2F%2Fcontents.mediadecathlon.com%2Fs853766%2Fk%2437e7bde0a47ca04db566a56de2b05876%2Fgym.jpg%3Ff%3D1920x470%26format%3Dauto&w=1920&q=75",
+        "https://www.decathlon.in/_next/image?url=https%3A%2F%2Fcontents.mediadecathlon.com%2Fs853869%2Fk%24495fac9eade376ad0155847780dca0aa%2Fpotm%2520dektop.jpg%3Ff%3D1920x470%26format%3Dauto&w=1920&q=75",
+      ];
+
+      var image1 = document.getElementById("image1");
+
+      var img1 = document.createElement("img");
+      img1.style.width = "98%";
+      img1.style.height = "50%";
+      img1.setAttribute("src", imgarr1[0]);
+      image1.append(img1);
+
+      window.addEventListener("load", () => {
+        var i = 0;
+        setInterval(() => {
+          i < imgarr1.length - 1 ? i++ : (i = 0);
+          img1.setAttribute("src", imgarr1[i]);
+        }, 3000);
+      });
+    </script>
+
+    <!-- SUB CATEGORY PART -->
+    <div>
+      <div class="sub-cat">
+        <div class="subcat1">
+          <img
+            style="width: 100%; height: 75%; margin-top: 10px"
+            src="./asset/fitness.png"
+            alt="Fitness Sports"
+          />
+        </div>
+        <div class="subcat1">
+          <img
+            style="width: 100%; height: 75%; margin-top: 10px"
+            src="./asset/shoes.png"
+            alt="Fitness Sports"
+          />
+        </div>
+        <div class="subcat1">
+          <img
+            style="width: 100%; height: 75%; margin-top: 10px"
+            src="./asset/watersports.png"
+            alt="Fitness Sports"
+          />
+        </div>
+        <div class="subcat1">
+          <img
+            style="width: 100%; height: 75%; margin-top: 10px"
+            src="./asset/raquet.png"
+            alt="Fitness Sports"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCESSARIES PART -->
+    <div>
+      <div class="accessory">
+        <div class="other1"></div>
+        <div class="other1"></div>
+        <div class="other1"></div>
+        <div class="other1"></div>
+      </div>
+    </div>
+
+    <!-- SPORTY STORIES PART -->
+    <div>
+      <p
+        style="
+          font-size: 24px;
+          font-weight: bold;
+          margin-left: 4vw;
+          margin-top: 10vh;
+        "
+      >
+        READ OUR SPORTY STORIES
+      </p>
+      <div class="sporty-story">
+        <div class="a"></div>
+        <div class="b"></div>
+        <div class="c"></div>
+        <div class="d"></div>
+      </div>
+    </div>
+
+    <!-- ONLINE EVENTS PART -->
+    <div>
+      <p
+        style="
+          font-size: 24px;
+          font-weight: bold;
+          margin-left: 4vw;
+          margin-top: 10vh;
+        "
+      >
+        JOIN OUR ONLINE EVENTS
+      </p>
+      <div class="events">
+        <div class="other2"></div>
+        <div class="other2"></div>
+        <div class="other2"></div>
+        <div class="other2"></div>
+      </div>
+    </div>
+
+    <!-- FOOTER PART -->
+    <footer>
+      <div class="container">
+        <div class="part1">
+          <div class="left-content">
+            <div class="our-promise">
+              <h5>
+                OUR <br />
+                PROMISE
+              </h5>
+              <a href="#" target="">
+                <span class="mr-2">
+                  <img
+                    src="https://contents.mediadecathlon.com/s815922/k$4c96f3fc80da8eca20c8ade8d1347d06/warranty%20black.png?format=auto"
+                    alt="Minimum 2 Years Warranty*"
+                  /> </span
+                >Minimum 2 Years <br />
+                Warranty*
+              </a>
+              <a href="#" target="">
+                <span class="mr-2">
+                  <img
+                    src="https://contents.mediadecathlon.com/s815921/k$7da28335077c70d5cdb391aa4efb67d5/home%20delivery%20black.png?format=auto"
+                    alt="Drive through/Free Pickup in Stores"
+                  /> </span
+                >Drive through/Free <br />
+                Pickup in Stores
+              </a>
+              <a href="#" target="">
+                <span class="mr-2">
+                  <img
+                    src="https://contents.mediadecathlon.com/s815924/k$346d028b8589907624e5287a02e8046d/Free%20pickup%20black.png?format=auto"
+                    alt="Home Delivery at Your Doorstep"
+                  /> </span
+                >Home Delivery at <br />
+                Your Doorstep
+              </a>
+              <a href="#" target="">
+                <span class="mr-2">
+                  <img
+                    src="https://contents.mediadecathlon.com/s815923/k$b11fcb85d69a3af8c77d574cd4eaacf5/eaasy%20return%20black.png?format=auto"
+                    alt="Easy 90 Days Return"
+                  /> </span
+                >Easy 90 Days Return
+              </a>
+            </div>
+            <div class="useful_links">
+              <div class="support">
+                <h4>SUPPORT</h4>
+                <div class="foot-links">
+                  <a href="#">Contact our Stores</a>
+                  <a href="#">Delivery</a>
+                </div>
+              </div>
+              <div class="our-services">
+                <h4>OUR SERVICES</h4>
+                <div class="foot-links">
+                  <a href="#">Decathlon for Schools</a>
+                  <a href="#">Decathlon for Corporates</a>
+                  <a href="#">Decathlon for Sport Clubs</a>
+                  <a href="#">E-Gift Vouchers</a>
+                  <a href="#">Decathlon Gift Cards</a>
+                </div>
+              </div>
+              <div class="about-us">
+                <h4>ABOUT US</h4>
+                <div class="foot-links">
+                  <a href="#">Who we are</a>
+                  <a href="#">Decathlon CSR</a>
+                  <a href="#">Careers</a>
+                  <a href="#">Newsroom</a>
+                  <a href="#">Made In India</a>
+                </div>
+              </div>
+              <div class="legal">
+                <h4>LEGAL</h4>
+                <div class="foot-links">
+                  <a href="#">Return Policy</a>
+                  <a href="#">Terms and Conditions</a>
+                  <a href="#">Privacy Policy</a>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="secure_tran">
+              <div class="secure">
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNy40MjciIGhlaWdodD0iNDMuODcxIiB2aWV3Qm94PSIwIDAgMzcuNDI3IDQzLjg3MSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzQyNDQ1MztzdHJva2U6IzQyNDQ1Mzt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC41IDAuNSkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTguMjA5LDQyLjg1OUMxNi4zNTQsNDIuODU5LDAsMzUuNDE4LDAsOC43YS43MzkuNzM5LDAsMCwxLC41NjktLjczOUMuNjk1LDcuOTQ5LDEzLjMsNC45LDE3LjY3Ny4yMTlhLjczOS43MzksMCwwLDEsMS4wNzIsMGM0LjQsNC42OTMsMTcsNy43MywxNy4xMDgsNy43NmEuNzM5LjczOSwwLDAsMSwuNTY5LjczOUMzNi40MjYsMzUuNDE4LDIwLjA3MSw0Mi44NTksMTguMjA5LDQyLjg1OVpNMS40NzgsOS4yNzJDMS43MDcsMzQuMSwxNi41MjQsNDEuMzM3LDE4LjIxNiw0MS4zODFTMzQuNzMzLDM0LjEsMzQuOTQ4LDkuMjcyQzMyLjQ1Nyw4LjYzNiwyMi43LDUuOTA5LDE4LjIwOSwxLjc2MywxMy43MjMsNS45MDksMy45NjgsOC42MzYsMS40NzgsOS4yNzJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDAuMDExKSIvPjwvZz48L2c+PC9zdmc+"
+                  alt="Secure"
+                />
+                <div class="secure_content">
+                  <h6>100% SECURE TRANSACTION</h6>
+                  <p>Secure SSL encryption</p>
+                </div>
+              </div>
+              <div class="card-4">
+                <img
+                  style="margin-right: 25px; margin-top: 10px"
+                  class="cards"
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2Ni41NTciIGhlaWdodD0iMzYuODYyIiB2aWV3Qm94PSIwIDAgNjYuNTU3IDM2Ljg2MiI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzAwNzliYTt9LmJ7ZmlsbDojZmFmYWZhO2ZvbnQtc2l6ZTo5cHg7Zm9udC1mYW1pbHk6Um9ib3RvQ29uZGVuc2VkLUl0YWxpYywgUm9ib3RvIENvbmRlbnNlZDtmb250LXN0eWxlOml0YWxpYztsZXR0ZXItc3BhY2luZzotMC4wMmVtO30uY3tmaWxsOm5vbmU7c3Ryb2tlOiNmN2Y3Zjc7fTwvc3R5bGU+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjA5NyAwLjIwMSkiPjxyZWN0IGNsYXNzPSJhIiB3aWR0aD0iNjMuODkzIiBoZWlnaHQ9IjM2Ljg2MiIgcng9IjMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuMDk3IC0wLjIwMSkiLz48dGV4dCBjbGFzcz0iYiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIuMDk3IDIxLjc5OSkiPjx0c3BhbiB4PSItMTkuOTg3IiB5PSIwIj5ERUJJVCBDQVJEPC90c3Bhbj48L3RleHQ+PHBhdGggY2xhc3M9ImMiIGQ9Ik0wLDBWMTIuMjM5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2Ni42NTQgNy45NjgpIHJvdGF0ZSg5MCkiLz48L2c+PC9zdmc+"
+                  alt="Debit"
+                />
+                <img
+                  style="margin-right: 25px; margin-top: 10px"
+                  class="cards"
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NC44MTEiIGhlaWdodD0iMzYuODYyIiB2aWV3Qm94PSIwIDAgNjQuODExIDM2Ljg2MiI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzU3NWQ1ZTt9LmJ7ZmlsbDojZmFmYWZhO2ZvbnQtc2l6ZTo5cHg7Zm9udC1mYW1pbHk6Um9ib3RvQ29uZGVuc2VkLUl0YWxpYywgUm9ib3RvIENvbmRlbnNlZDtmb250LXN0eWxlOml0YWxpYztsZXR0ZXItc3BhY2luZzotMC4wMmVtO30uY3tmaWxsOm5vbmU7c3Ryb2tlOiNmN2Y3Zjc7fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJhIiB3aWR0aD0iNjMuODkzIiBoZWlnaHQ9IjM2Ljg2MiIgcng9IjMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiLz48dGV4dCBjbGFzcz0iYiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzEuNjM2IDIyLjIyKSI+PHRzcGFuIHg9Ii0yMi4zNCIgeT0iMCI+Q1JFRElUIENBUkQ8L3RzcGFuPjwvdGV4dD48cGF0aCBjbGFzcz0iYyIgZD0iTTAsMFYxMi4yMzkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY0LjgxMSA3Ljk2OCkgcm90YXRlKDkwKSIvPjxwYXRoIGNsYXNzPSJjIiBkPSJNMCwwVjEyLjIzOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjQuODExIDEwLjQyNSkgcm90YXRlKDkwKSIvPjwvc3ZnPg=="
+                  alt="Credit"
+                />
+                <img
+                  style="margin-right: 25px; margin-top: 10px"
+                  class="cards"
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2My44OTMiIGhlaWdodD0iMzYuODYyIiB2aWV3Qm94PSIwIDAgNjMuODkzIDM2Ljg2MiI+PGRlZnM+PHN0eWxlPi5hLC5me2ZpbGw6bm9uZTt9LmF7c3Ryb2tlOiM3MDcwNmU7fS5ie2ZpbGw6IzcwNzA2ZTt9LmN7ZmlsbDojMDk4MDQxO30uZHtmaWxsOiNlOTc2MjY7fS5le3N0cm9rZTpub25lO308L3N0eWxlPjwvZGVmcz48ZyBjbGFzcz0iYSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSI+PHJlY3QgY2xhc3M9ImUiIHdpZHRoPSI2My44OTMiIGhlaWdodD0iMzYuODYyIiByeD0iMyIvPjxyZWN0IGNsYXNzPSJmIiB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9IjYyLjg5MyIgaGVpZ2h0PSIzNS44NjIiIHJ4PSIyLjUiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOS4yMzggMTIuNjA2KSI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCkiPjxwYXRoIGNsYXNzPSJiIiBkPSJNNjk5LjIzNyw5Ny41MzJINjk2LjhMNzAwLjE4Nyw4NS4zaDIuNDM3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTY2NC40MTQgLTg1LjMpIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTUuOTkgMC4wMzMpIj48cGF0aCBjbGFzcz0iYiIgZD0iTTQxOS4wNjcsODYuMjVhLjkuOSwwLDAsMC0uNzgzLS4zNUg0MDQuODkybC0uNjYxLDIuNGgxMi4xODJsLS43MTEsMi41NmgtOS43NDR2LS4wMDZoLTIuNDM3bC0yLjAyMSw3LjNoMi40MzdsMS4zNTUtNC45aDEwLjk1NWExLjU0NCwxLjU0NCwwLDAsMCwuOTY2LS4zNSwxLjYyNywxLjYyNywwLDAsMCwuNTk0LS44NjZsMS4zNTUtNC45QS45OTMuOTkzLDAsMCwwLDQxOS4wNjcsODYuMjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDAxLjUgLTg1LjkpIi8+PC9nPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTI4LjA4Nyw5Ny4zMzJhMS4xMjMsMS4xMjMsMCwwLDEtMS4wNzcuODIySDExNC40NDVhLjg3OC44NzgsMCwwLDEtLjc2Ni0uMzUuOTYxLjk2MSwwLDAsMS0uMTA1LS44NjZMMTE2LjYzOCw4NS45aDIuNDM3bC0yLjczNyw5Ljg2MWg5Ljc1bDIuNzM3LTkuODYxaDIuNDM3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMy41MTggLTg1Ljg2NykiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNi44NDkgMC4wMjIpIj48cGF0aCBjbGFzcz0iYyIgZD0iTTgxOS43LDg1LjdsMy4wODEsNi4xMy02LjQ4LDYuMTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtODE0LjEyOSAtODUuNykiLz48cGF0aCBjbGFzcz0iZCIgZD0iTTc4MC42LDg1LjdsMy4wODIsNi4xMy02LjQ4NSw2LjEzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc3Ny4yIC04NS43KSIvPjwvZz48L2c+PC9nPjwvc3ZnPg=="
+                  alt="UPI"
+                />
+                <img
+                  style="margin-top: 10px"
+                  class="cards"
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2My44OTMiIGhlaWdodD0iMzYuODYyIiB2aWV3Qm94PSIwIDAgNjMuODkzIDM2Ljg2MiI+PGRlZnM+PHN0eWxlPi5hLC5le2ZpbGw6bm9uZTt9LmF7c3Ryb2tlOiM3MDcwNzA7fS5iLC5je2ZpbGw6IzU3NWQ1ZTtmb250LXNpemU6OXB4O2ZvbnQtc3R5bGU6aXRhbGljO2xldHRlci1zcGFjaW5nOi0wLjAyZW07fS5ie2ZvbnQtZmFtaWx5OlJvYm90b0NvbmRlbnNlZC1JdGFsaWMsIFJvYm90byBDb25kZW5zZWQ7fS5je2ZvbnQtZmFtaWx5OlJvYm90b0NvbmRlbnNlZC1Cb2xkSXRhbGljLCBSb2JvdG8gQ29uZGVuc2VkO2ZvbnQtd2VpZ2h0OjcwMDt9LmR7c3Ryb2tlOm5vbmU7fTwvc3R5bGU+PC9kZWZzPjxnIGNsYXNzPSJhIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIj48cmVjdCBjbGFzcz0iZCIgd2lkdGg9IjYzLjg5MyIgaGVpZ2h0PSIzNi44NjIiIHJ4PSIzIi8+PHJlY3QgY2xhc3M9ImUiIHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iNjIuODkzIiBoZWlnaHQ9IjM1Ljg2MiIgcng9IjIuNSIvPjwvZz48dGV4dCBjbGFzcz0iYiIgdHJhbnNmb3JtPSJtYXRyaXgoMC45ODUsIC0wLjE3NCwgMC4xNzQsIDAuOTg1LCAyNi40NDIsIDE3LjMyMSkiPjx0c3BhbiB4PSItNy42NzMiIHk9IjAiPk5FVCA8L3RzcGFuPjwvdGV4dD48dGV4dCBjbGFzcz0iYyIgdHJhbnNmb3JtPSJtYXRyaXgoMC45ODUsIC0wLjE3NCwgMC4xNzQsIDAuOTg1LCAzNC42MTMsIDI1LjA3OCkiPjx0c3BhbiB4PSItMTUuNDcxIiB5PSIwIj5CQU5LSU5HPC90c3Bhbj48L3RleHQ+PC9zdmc+"
+                  alt="Net Banking"
+                />
+              </div>
+              <div class="site_map">
+                <a href="#">Site Map</a>
+              </div>
+              <div class="decathlon">
+                DECATHLON is present in
+                <div class="countries">
+                  <p class="p-c">
+                    46<!-- -->
+                    <!-- -->Countries
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="right-content">
+            <div class="app">
+              <h6>
+                EXPERIENCE DECATHLON APP ON <br />
+                MOBILE
+              </h6>
+              <div class="google_play">
+                <a href="#" target="_blank">
+                  <img
+                    src="data:image/png;base64,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"
+                    alt="Gplay"
+                  />
+                </a>
+                <a href="#" target="_blank">
+                  <img
+                    src="https://cdncontent.decathlon.in/_next/static/images/app_store-76193f3bfd9ae751fd53079ddca46099.svg"
+                    alt="Gplay"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="follow">
+              <h6>FOLLOW US</h6>
+              <div class="social_media">
+                <a href="#" title="Facebook" target="_blank">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5LjE0OSIgaGVpZ2h0PSIxOS44MTkiIHZpZXdCb3g9IjAgMCA5LjE0OSAxOS44MTkiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNlZmViZTM7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNMi4wNzUsMTkuODE5aDMuOTlWOS44MjVIOC44NTFsLjMtMy4zMjlINi4wNjVWNC41ODZjMC0uNzkxLjE2MS0xLjEuOTIxLTEuMUg5LjE0OVYwSDYuMzg2QzMuNDEzLDAsMi4wNzUsMS4zMDcsMi4wNzUsMy44MjJWNi41SDB2My4zOUgyLjA3NVoiLz48L3N2Zz4="
+                    target="_blank"
+                    alt="facebook"
+                  />
+                </a>
+                <a href="#" title="Twitter" target="_blank">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNC4zNjEiIGhlaWdodD0iMTkuODE5IiB2aWV3Qm94PSIwIDAgMjQuMzYxIDE5LjgxOSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2VmZWJlMzt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImEiIGQ9Ik0wLDE3LjUzMmExNC4xNTUsMTQuMTU1LDAsMCwwLDcuNjY0LDIuMjQ5LDE0LjEzNywxNC4xMzcsMCwwLDAsMTQuMi0xNC44NjksMTAuMTc5LDEwLjE3OSwwLDAsMCwyLjQ5NC0yLjU4NSw5Ljk2Niw5Ljk2NiwwLDAsMS0yLjg3My43ODMsNC45OTQsNC45OTQsMCwwLDAsMi4yLTIuNzY2LDkuOTcxLDkuOTcxLDAsMCwxLTMuMiwxLjIxNSw1LDUsMCwwLDAtOC41MjcsNC41NTdBMTQuMiwxNC4yLDAsMCwxLDEuNjk1LjksNSw1LDAsMCwwLDMuMjQ2LDcuNTcxLDQuOTMsNC45MywwLDAsMSwuOTgxLDYuOTQyYTUsNSwwLDAsMCw0LjAwOCw0Ljk2Nyw1LjAyLDUuMDIsMCwwLDEtMi4yNi4wODVBNSw1LDAsMCwwLDcuNCwxNS40NjQsMTAuMDMsMTAuMDMsMCwwLDEsMCwxNy41MzJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDAuMDM4KSIvPjwvc3ZnPg=="
+                    target="_blank"
+                    alt="twitter"
+                  />
+                </a>
+                <a href="#" title="instagram" target="_blank">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOS44MTkiIGhlaWdodD0iMTkuODE5IiB2aWV3Qm94PSIwIDAgMTkuODE5IDE5LjgxOSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2VmZWJlMzt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIzNy41MDYgLTg1LjIyNSkiPjxwYXRoIGNsYXNzPSJhIiBkPSJNOS45MSwxLjc4NmMyLjY0NiwwLDIuOTQ5LDAsNCwuMDU1YTUuNTYxLDUuNTYxLDAsMCwxLDEuODQxLjM0MSwzLjEzLDMuMTMsMCwwLDEsMS4xNDIuNzQyLDMuMDY3LDMuMDY3LDAsMCwxLC43MzcsMS4xNDJBNS4zNDIsNS4zNDIsMCwwLDEsMTcuOTc0LDUuOWMuMDUxLDEuMDQ1LjA1OSwxLjM1Ny4wNTksNHMwLDIuOTQ5LS4wNTksNGE1LjM0Miw1LjM0MiwwLDAsMS0uMzQxLDEuODQxLDMuMjMyLDMuMjMyLDAsMCwxLTEuODc5LDEuODc5LDUuMzQyLDUuMzQyLDAsMCwxLTEuODQxLjM0MWMtMS4wNDUuMDUxLTEuMzU3LjA1OS00LC4wNTlzLTIuOTQ5LDAtNC0uMDU5YTUuMzQyLDUuMzQyLDAsMCwxLTEuODQxLS4zNDEsMy4wNjcsMy4wNjcsMCwwLDEtMS4xNDItLjcyOSwzLjEzLDMuMTMsMCwwLDEtLjc0Mi0xLjE0Miw1LjU2MSw1LjU2MSwwLDAsMS0uMzQxLTEuODVjLS4wNDYtMS4wNDUtLjA1NS0xLjM1Ny0uMDU1LTRzMC0yLjk0OS4wNTUtNGE1LjU2MSw1LjU2MSwwLDAsMSwuMzQxLTEuODQxQTMuMjc0LDMuMjc0LDAsMCwxLDQuMDY2LDIuMTgyLDUuNTYxLDUuNTYxLDAsMCwxLDUuOSwxLjg0MWMxLjA0NS0uMDQ2LDEuMzU3LS4wNTUsNC0uMDU1TTkuOSwwQzcuMjA5LDAsNi44NzIsMCw1LjgxNC4wNTlhNy4zNzcsNy4zNzcsMCwwLDAtMi40LjQ1OUE0LjkyNSw0LjkyNSwwLDAsMCwxLjY4NSwxLjY4NSw0LjkyNSw0LjkyNSwwLDAsMCwuNTE4LDMuNDE3LDcuMzc3LDcuMzc3LDAsMCwwLC4wNTksNS44MjNDMCw2Ljg4LDAsNy4yMTcsMCw5LjkwOVMwLDEyLjkzOS4wNTksMTRBNy4zNzcsNy4zNzcsMCwwLDAsLjUxOCwxNi40YTQuOTI1LDQuOTI1LDAsMCwwLDEuMTY3LDEuNzUzQTQuODU4LDQuODU4LDAsMCwwLDMuNDE3LDE5LjNhNy4yNTUsNy4yNTUsMCwwLDAsMi40MDYuNDYzYzEuMDU4LjA0NiwxLjM5NS4wNTksNC4wODcuMDU5czMuMDI5LDAsNC4wODctLjA1OUE3LjI1NSw3LjI1NSwwLDAsMCwxNi40LDE5LjMsNS4wNTYsNS4wNTYsMCwwLDAsMTkuMywxNi40LDcuMjU1LDcuMjU1LDAsMCwwLDE5Ljc2LDE0Yy4wNDYtMS4wNTguMDU5LTEuMzk1LjA1OS00LjA4N3MwLTMuMDI5LS4wNTktNC4wODdBNy4yNTUsNy4yNTUsMCwwLDAsMTkuMywzLjQxN2E0Ljg1OCw0Ljg1OCwwLDAsMC0xLjE0Mi0xLjczMkE0LjkyNSw0LjkyNSwwLDAsMCwxNi40LjUzOSw3LjM3Nyw3LjM3NywwLDAsMCwxNCwuMDU5QzEyLjkzOSwwLDEyLjYsMCw5LjkxLDAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIzNy41MDYgODUuMjI1KSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTYuNTMsMTEuNDRhNS4wOSw1LjA5LDAsMSwwLDUuMDksNS4wOSw1LjA5LDUuMDksMCwwLDAtNS4wOS01LjA5bTAsOC4zOTNhMy4zLDMuMywwLDEsMSwzLjMtMy4zLDMuMywzLjMsMCwwLDEtMy4zLDMuMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjMwLjg4NiA3OC42MDQpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik0zNS42MjUsOS4zNjhBMS4xOTIsMS4xOTIsMCwxLDEsMzQuNDMyLDguMThhMS4xOTIsMS4xOTIsMCwwLDEsMS4xOTIsMS4xODgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIxOC4yNzEgODAuNDkxKSIvPjwvZz48L3N2Zz4="
+                    target="_blank"
+                    alt="instagram"
+                  />
+                </a>
+                <a href="#" title="Youtube" target="_blank">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNy4xNzIiIGhlaWdodD0iMTkuODE5IiB2aWV3Qm94PSIwIDAgMTcuMTcyIDE5LjgxOSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2VmZWJlMzt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMzMC44MDcgLTg1LjIyNSkiPjxwYXRoIGNsYXNzPSJhIiBkPSJNMjcuNTExLDEwLjkxNGExLjY2NCwxLjY2NCwwLDAsMCwxLjIxNS0uNzA4di42MjdoMS4wNDlWNS4xODRIMjguNzI2djQuMjhjLS4xMjguMTYzLS40MTQuNDIyLS42MTkuNDIycy0uMjc5LS4xNTEtLjI3OS0uMzg3VjUuMThIMjYuNzhWOS45QzI2Ljc4LDEwLjQ1NCwyNi45NSwxMC45MTQsMjcuNTExLDEwLjkxNFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMxNC4zODkgODIuMDQ5KSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTYuNjA3LDkuMzU1YTEuMzU3LDEuMzU3LDAsMCwwLDEuNTQ4LDEuNTA5LDEuNDM2LDEuNDM2LDAsMCwwLDEuNTA5LTEuNTA5VjYuNmExLjQ3LDEuNDcsMCwwLDAtMS41MDktMS41MTNBMS40MzksMS40MzksMCwwLDAsMTYuNjA3LDYuNlptMS4wOC0yLjY3NGMwLS4zMS4xNDMtLjUzOC40MzctLjUzOHMuNDYuMjI0LjQ2LjUzOFY5LjNjMCwuMzA2LS4xNTkuNTMtLjQ0MS41M2EuNDcyLjQ3MiwwLDAsMS0uNDU3LS41M1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMC42MjcgODIuMTEpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik03LjkxNSw3LjY1SDkuMXYtMy4xTDEwLjQ3MiwwaC0xLjJMOC41MTQsMy4wNTcsNy43LDBINi41MWwxLjQsNC41NDdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjYuODE1IDg1LjIyNSkiLz48cGF0aCBjbGFzcz0iYSIgZD0iTTE0Ljc2OSwyMy4wOEgyLjM4N0EyLjQwNywyLjQwNywwLDAsMCwwLDI1LjQ4N3Y2LjA3NWEyLjQwNywyLjQwNywwLDAsMCwyLjQsMi40MDdIMTQuNzg1YTIuNDA3LDIuNDA3LDAsMCwwLDIuMzg3LTIuNDA3VjI1LjQ4N2EyLjQwNywyLjQwNywwLDAsMC0yLjQtMi40MDdaTTQuMDUxLDMyLjE2NUgyLjkyOVYyNS45MzlIMS43NjhWMjQuODgzSDUuMjJ2MS4wNTZINC4wNTlabTQsMGgtMXYtLjZhMi4xLDIuMSwwLDAsMS0uNTczLjVjLS41MzguMzEtMS4yNzcuMy0xLjI3Ny0uNzc0VjI2Ljc5NWguOTg3djQuMTE3YzAsLjIxNy4wNS4zNjQuMjYzLjM2NHMuNDY4LS4yNTIuNTg4LS4zODdWMjYuNzk1aDFaTTExLjksMzEuMDU1YzAsLjY2Mi0uMjQ4LDEuMTgtLjkxMywxLjE4YTEuMTYxLDEuMTYxLDAsMCwxLS45NDgtLjQ4di40MUg5LjAyN1YyNC44ODNoMS4wMXYyLjM0NWExLjIsMS4yLDAsMCwxLC44ODYtLjVjLjczMSwwLC45NzUuNjE5Ljk3NSwxLjM0N1ptMy42OTEtMS40MjhIMTMuNjgydjEuMDE0YzAsLjM4Ny4wMzEuNzUxLjQzMy43NTFzLjQ0OS0uMjg2LjQ0OS0uNzUxdi0uMzg3SDE1LjU5di4zODdjMCwxLjAzMy0uNDQ1LDEuNjYtMS41LDEuNjYtLjk1MiwwLTEuNDM5LS43LTEuNDM5LTEuNjZ2LTIuNGExLjQ3NCwxLjQ3NCwwLDAsMSwxLjUxNy0xLjU3OWMuOTYsMCwxLjQyLjYwNywxLjQyLDEuNTc5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzMwLjgwNyA3MS4wNzUpIi8+PHBhdGggY2xhc3M9ImEiIGQ9Ik0yNi4xNDUsMzQuNzU1YS43NzQuNzc0LDAsMCwwLS4yMDUuMTY2djMuMzQ3YS44MzIuODMyLDAsMCwwLC4yMzYuMTkuNDI2LjQyNiwwLDAsMCwuNTExLS4wNTQuNjI3LjYyNywwLDAsMCwuMDg1LS4zODdWMzUuMjU4YS42ODkuNjg5LDAsMCwwLS4xLS40MTRBLjQyMi40MjIsMCwwLDAsMjYuMTQ1LDM0Ljc1NVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMxNC45MDMgNjMuOTUpIi8+PC9nPjwvc3ZnPg=="
+                    target="_blank"
+                    alt="youtube"
+                  />
+                </a>
+              </div>
+              <div class="blog">
+                <h6>SPORT ADVICE FOR YOU</h6>
+                <div class="social_blog">
+                  <a href="#" title="Facebook" target="_blank"
+                    >blog.decathlon.in</a
+                  >
+                </div>
+              </div>
+              <div class="explore">
+                <h6>EXPLORE SPORTS EVENTS NEAR YOU</h6>
+                <div class="social_blog">
+                  <a href="#" title="Facebook" target="_blank"
+                    >allforsport.in</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part2">
+          <h3>OUR PURPOSE</h3>
+          <p class="sustain">
+            <span
+              >To Sustainably
+              <!-- --> </span
+            >Make the Pleasure and Benefits of Sports Accessible to the Many
+          </p>
+          <div class="logo">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDA1LjM1OCIgaGVpZ2h0PSIyMTUuMDU2IiB2aWV3Qm94PSIwIDAgMTQwNS4zNTggMjE1LjA1NiI+PGRlZnM+PHN0eWxlPi5he29wYWNpdHk6MC4xMTM7fS5ie2ZpbGw6IzQyNDQ1Mzt9PC9zdHlsZT48L2RlZnM+PGcgY2xhc3M9ImEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTE4KSI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxOCkiPjxwYXRoIGNsYXNzPSJiIiBkPSJNNzcsMS43OUgxOTVWNDcuMTY2bC02NC45MjMuMDQ4djMzLjdsNTYuMjA5LS4wNDh2NDQuMzE3bC01Ni4yMDkuMXYzNy4zNkgxOTV2NDUuMjA4SDc3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTA4LjM1NiAyLjUxOSkiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTM2NC40LDQuMjEzcy02OC4yOTMsMTE2LjItNzQuOTM3LDEyNi42NjhjLTcuOCwxMi4zMjUtMjQuNzQ2LDMxLjgyMy01MC4zODMsMzEuNDg2LTQxLjc0MS0uNjI2LTU3LjQxMi0yOS40NjQtNTcuNDEyLTU1LjM2NmE1NS4zNjYsNTUuMzY2LDAsMCwxLDU0LjEzOC01NS4zNjZjMzQuNjY0LS43LDYwLjQ0NSwzMi41LDYwLjQ0NSwzMi41bDI3LjEwNS00My42NjdTMjkyLjY4OC0xLjE3OSwyMzYuMzExLjFjLTg0LjksMS44NzgtMTA5LjYsNzMuMDExLTEwOS42LDEwNS45MTgsMCw2OS40LDUzLjQ0LDEwNC4wNjQsOTcuMDU5LDEwOC4zMjVDMjg2LjYsMjIwLjQ1NCwzMjEsMTc5LjQxLDMyMSwxNzkuNDFzLS40MzMsMCwxLjcwOS0uMTY5YzEyLjY4Ni0uMTQ0LDQ2LjEyMi4xNjksNDYuMTIyLjE2OXYzMC44NjFoNTEuMDU3VjQuMjEzWm01LjQ2NCwxMzIuMDM2SDM0Mi41MTdsMjcuMzQ2LTQ2LjY3NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE3OC4zMDggMC4wOTYpIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yOTQuMzExLDIwOC4wMVY1MS4wMzZIMjUzLjFWMS43NkgzODguNTA2VjUxLjAzNkgzNDcuMzY3VjIwOC4wMVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM1Ni4xNjcgMi40NzcpIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik00MjEuNTIzLDEyOS4xaC01NC42djc4Ljg4NUgzMTMuOTJWMS43OGg1My4wMDdWODAuMDg3aDU0LjZWMS43OGg1My4wMzF2MjA2LjJINDIxLjUyM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ0MS43NTQgMi41MDUpIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0zODcuMzgsMjA3Ljk1NFYxLjhoNTIuNzQyVjE2Mi40MWg2MS44OXY0NS41NDVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NDUuMTI4IDIuNTMzKSIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNNTI5LjE5MiwxNjMuNTQ2YzMwLjA0MiwwLDU0LjQ1MS0yMy44OCw1NC40NTEtNTcuNzczYTU0LjczNCw1NC43MzQsMCwxLDAtMTA5LjQ2OCwwYy4wMTIsMzIuNjY2LDI2LjE3OSw1Ny43NzMsNTUuMDE3LDU3Ljc3M20tNzUuOS0xMzMuMjE1QzQ3My45LDEwLjIwNyw0OTkuNjc5LDAsNTI5LjQ4LDBhMTA2LjMyNywxMDYuMzI3LDAsMCwxLDc0Ljc0NSwzMC42MiwxMDQuNCwxMDQuNCwwLDAsMSwzMi4zNTMsNzUuNTE0QTEwNi44OCwxMDYuODgsMCwwLDEsNTI5LjE5MiwyMTQuOTE2Yy0zMC45MDksMC01Ny4zNjQtMTEuMDQ5LTc3Ljk5NC0zMi43MTQtMTkuNjY3LTIwLjY1NC0yOS42NTctNDYuMjkxLTI5LjY1Ny03Ni45MTFhMTAzLjM2NywxMDMuMzY3LDAsMCwxLDMxLjc1MS03NC45NjEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU5My4xOTggMCkiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTUwOC44OCwyMDcuOTY4VjEuNzloNDcuODA4TDYzNi4yNDcsMTE2LjNWMS43OWg1My4wMDdWMjA3Ljk2OGgtNDYuNkw1NjEuODM5LDkzLjEyVjIwNy45NjhaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3MTYuMTA1IDIuNTE5KSIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTM0LjE1NCwxMDQuMTY5YzAtMzcuMTE5LTIxLjA2My01OC4wMzgtNjAuMDM2LTU4LjAzOEg1Mi45NTlWMTYyLjY4OEg3NC4zODNjNDAuNTg2LDAsNTkuNzcxLTE3LjkzNCw1OS43NzEtNTguNTE5TTAsMjA3Ljk2OFYxLjc5SDc0LjExOGMzNC40NDcsMCw1OC41MTksNC4zMzMsODEuMSwyNC41NzgsMjAuNjc4LDE4LjU2LDMxLjY1NSw0NS41MiwzMS42NTUsNzkuNDM4LDAsMzEuMjk0LTEwLjY2NCw1Ny4xLTMxLjI5NCw3Ni41NS0yMy4xMzMsMjEuNDI0LTQzLjU3MSwyNS41MTYtNzQuMDcsMjUuNTE2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAyLjUxOSkiLz48L2c+PC9nPjwvc3ZnPg=="
+              alt="Decathlon"
+            />
+            <p>© 2021 Decathlon Sports India Pvt Ltd. All rights reserved.</p>
+          </div>
+          <div class="foot_bottom">
+            <span class="blue"></span>
+            <span class="orange"></span>
+            <span class="green"></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

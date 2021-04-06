@@ -1,0 +1,98 @@
+<!-- Problem
+Create an Online Sports Store
+Use decathlon.com to clone UI parts
+Create Registration.html and Login.html pages. The user should be able to login only if he has registered. Add validation to both forms.
+Create Navbar as per Decathlon.com. If user logs in successfully, show their first name on top right corner on all pages until they logout.
+Create a slideshow as shown on decathlon.com
+Show 4 categories of sports on your website. Cricket, football, hockey and boxing. Show 4 boxes in a row with sports name inside them. Refer decathlon’s discover a new sport element shown on their homepage for UI.
+Depending on which sport user clicked, it should show user at least 5 products related only to that sport. For e.g when user clicks on boxing show boxing equipment below those 4 sport categories.
+Each product should have name, price, description, unique id. Show image as well for each product.
+Add sorting functionalities as well. Like ‘sort by price: low to high and high to low’, sort by name.
+Add ‘Add to Cart’ button. When the user clicks on it, that particular product should get added to cart. The cart will be implemented as cart.html.
+When the user goes to the cart, he should be able to see all the products he has added with the total price.the user should be able to add the quantities of each product. According to that, update the cart and total value.
+Add a discount box as well. If the user types 10, give a 10% discount and update the cart value. If the user types 20, give a 20% discount and so on.
+User should be able to checkout now. When they click on ‘checkout’, the payment process starts.
+Ask for their card number, CVV, name, etc. validate the form. If correct, generate a random 4 digit otp and check if they have entered the same in the OTP input box.
+Once everything is done, show them a final message that your item will be delivered in the next 7 days, and thanks for shopping.
+NOTE- Focus on the functional part. use decathlon as reference for UI. Styling is important but keep it a low priority than the functional part. If you can do both, extra points. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>register</title>
+  </head>
+  <body>
+    <div id="register">
+      <h1>Create Account</h1>
+      <form id="myform">
+        <input
+          type="text"
+          required
+          id="fname"
+          placeholder="First Name*"
+        /><br /><br />
+        <input
+          type="text"
+          required
+          id="lname"
+          placeholder="Last Name*"
+        /><br /><br />
+        <input
+          type="text"
+          required
+          id="email"
+          placeholder="Email*"
+        /><br /><br />
+        <input
+          type="password"
+          required
+          id="password"
+          placeholder="Password*"
+        /><br />
+
+        <h3>Newsletter subscription</h3>
+
+        <input type="radio" value="yes" id="subscribe" name="radio" /> Yes, sign
+        me up <br />
+        <input type="radio" value="no" id="nosubscribe" name="radio" />No, do
+        not sign me up
+
+        <p>
+          By continuing, you agree to Decathlon’s <a href="#">Terms</a> and
+          <a href="#">Privacy Policy.</a>
+        </p>
+
+        <input type="submit" value="CREATE" /><br />
+        <a href="login.html">BACK TO SIGN IN</a>
+      </form>
+    </div>
+
+    <script>
+      var form = document.getElementById("myform");
+      form.addEventListener("submit", submitData);
+
+      //var userdata = JSON.parse(localStorage.getItem)
+      var userdata = [];
+      function submitData(e) {
+        e.preventDefault();
+        var user = {
+          fname: fname.value,
+          lname: lname.value,
+          email: email.value,
+          password: password.value,
+        };
+
+        //console.log(user);
+        userdata.push(user);
+        console.log(user);
+
+        localStorage.setItem("users", JSON.stringify(userdata));
+
+        location.assign("login.html");
+      }
+    </script>
+  </body>
+</html>

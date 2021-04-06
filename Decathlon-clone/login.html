@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+  </head>
+  <body>
+    <h1>Sign in</h1>
+    <form id="form">
+      <input type="text" placeholder="email" required id="email" /><br /><br />
+      <input type="password" placeholder="password" required id="password" />
+
+      <p>
+        By continuing, you agree to Decathlon’s <a href="#">Terms</a> and
+        <a href="#">Privacy Policy.</a>
+      </p>
+      <input type="submit" value="SIGN IN" /><br />
+      <br />
+      <a href="">FORGOT PASSWORD</a>
+    </form>
+    <br />
+    <button onclick="signup()">CREATE ACCOUNT</button>
+
+    <script>
+      function signup() {
+        location.assign("register.html");
+      }
+      var form = document.getElementById("form");
+      form.addEventListener("submit", loginUser);
+
+      function loginUser(e) {
+        e.preventDefault();
+        // var user = {
+        //   email: email.value,
+        //   password: password.value,
+        // };
+
+        var data = JSON.parse(localStorage.getItem("users"));
+
+        if (
+          data[0].email == email.value &&
+          data[0].password == password.value
+        ) {
+          alert("login Succesful");
+          window.location.href = "./dashboard.html";
+        } else {
+          alert("wrong inputs");
+        }
+      }
+    </script>
+  </body>
+</html>

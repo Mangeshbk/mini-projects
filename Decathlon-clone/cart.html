@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cart</title>
+    <style>
+      body {
+        background-color: whitesmoke;
+        font-family: "Roboto Condensed", sans-serif !important;
+        color: #424453;
+        margin: 0%;
+        padding: 0%;
+      }
+      .cartNavbar {
+        height: fit-content;
+        padding: 10px;
+        width: 99vw;
+        background-color: white;
+        position: fixed;
+        z-index: -1;
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 1px solid whitesmoke;
+        align-items: center;
+        top: 0;
+      }
+
+      .logo {
+        margin-left: 30px;
+        height: 40px;
+        width: 120px;
+      }
+
+      .logo img,
+      .rightLogo img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .cartOption {
+        width: 500px;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: grey;
+        font-size: 12px;
+      }
+
+      .rightLogo {
+        display: flex;
+        /* margin-right: 10px; */
+        width: 250px;
+        height: 30px;
+      }
+
+      .rightLogo > div {
+        height: 30px;
+        margin-left: 5px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .rightLogoText {
+        line-height: 2px;
+        margin-top: -5px;
+      }
+
+      #show-products {
+        display: flex;
+        gap: 2%;
+        width: 90vw;
+        height: 45vh;
+        margin: 15vh auto 10vh auto;
+        justify-content: space-around;
+        align-items: center;
+        /* border: 1px solid red; */
+      }
+
+      .products {
+        width: 45vh;
+        height: 45vh;
+        /* border: 1px solid black; */
+        border-radius: 10px;
+      }
+      .products {
+        width: 42vh;
+        height: 45vh;
+        /* border: 1px solid black; */
+      }
+      .promo {
+        width: 600px;
+        margin: auto;
+        text-align: center;
+        /* border: 1px solid black; */
+      }
+      #input {
+        width: 400px;
+        height: 40px;
+        border-radius: 10px;
+      }
+      #promobtn {
+        width: 150px;
+        height: 45px;
+        cursor: pointer;
+        outline: none;
+        background: none;
+        border-radius: 10px;
+      }
+      #promobtn:hover {
+        background-color: cornflowerblue;
+      }
+      #empty {
+        margin: 10vh auto 0 auto;
+      }
+      .eimg {
+        width: 400px;
+        height: 600px;
+        margin-left: 600px;
+      }
+      #checkout {
+        text-align: center;
+        margin: 15vh auto 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV BAR -->
+    <div class="cartNavbar">
+      <div class="logo">
+        <img
+          src="https://cdn.decathlon.in/_next/static/images/logo-93d12d8cff484ab736d2a39f15bf66d8.svg"
+        />
+      </div>
+      <div class="cartOption" id="nav">
+        <div>
+          <label for="cart">Cart</label>
+          <input name="a" type="submit" value="O" onclick="show1()" />
+        </div>
+        <div>
+          <label for="address">Address & Delivery</label>
+          <input name="a" type="submit" value="O" onclick="show2()" />
+        </div>
+        <div>
+          <label for="payment">Payment</label>
+          <input name="a" type="submit" value="O" onclick="show3()" />
+        </div>
+      </div>
+      <div class="rightLogo">
+        <div>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNy40MjciIGhlaWdodD0iNDMuODcxIiB2aWV3Qm94PSIwIDAgMzcuNDI3IDQzLjg3MSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2YyNjYwMDtzdHJva2U6I2YyNjYwMDt9LmJ7ZmlsbDojMDA4MWM2O3N0cm9rZTojMDA4MWM2O308L3N0eWxlPjwvZGVmcz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTczNy41IC0yNC41KSI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTc1MCAzNykiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDApIj48cGF0aCBjbGFzcz0iYSIgZD0iTS40MzMsMTkuNzExYS40NTEuNDUxLDAsMCwxLS4yNzctLjFBLjQ2LjQ2LDAsMCwxLDAsMTkuMjc3VjkuNzRhLjQzMy40MzMsMCwwLDEsLjM1NS0uNDMzbDExLjY1Mi0yLjFhLjQ0Mi40NDIsMCwwLDEsLjM1NS4wODcuNDUxLjQ1MSwwLDAsMSwuMTQ3LjMzOHY5LjUzN2EuNDMzLjQzMywwLDAsMS0uMzU1LjQzM0wuNTEyLDE5LjdaTS44NjcsMTAuMDd2OC42N2wxMC43NzctMS45MjVWOC4xNDVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0wLjk1OCkiLz48cGF0aCBjbGFzcz0iYSIgZD0iTTMuMzEzLDguMzU4YS40MzMuNDMzLDAsMCwxLS40MzMtLjQzM1YzLjc2M2EzLjc2MywzLjc2MywwLDEsMSw3LjUyNSwwVjYuNjc2YS40NDIuNDQyLDAsMCwxLS40MzMuNDMzLjQzMy40MzMsMCwwLDEtLjQzMy0uNDMzVjMuNzYzYTIuOSwyLjksMCwwLDAtNS43OTIsMFY3LjkyNEEuNDMzLjQzMywwLDAsMSwzLjMxMyw4LjM1OFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjM4MyAwKSIvPjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTczOCAyNSkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTguMjA5LDQyLjg1OUMxNi4zNTQsNDIuODU5LDAsMzUuNDE4LDAsOC43YS43MzkuNzM5LDAsMCwxLC41NjktLjczOUMuNjk1LDcuOTQ5LDEzLjMsNC45LDE3LjY3Ny4yMTlhLjczOS43MzksMCwwLDEsMS4wNzIsMGM0LjQsNC42OTMsMTcsNy43MywxNy4xMDgsNy43NmEuNzM5LjczOSwwLDAsMSwuNTY5LjczOUMzNi40MjYsMzUuNDE4LDIwLjA3MSw0Mi44NTksMTguMjA5LDQyLjg1OVpNMS40NzgsOS4yNzJDMS43MDcsMzQuMSwxNi41MjQsNDEuMzM3LDE4LjIxNiw0MS4zODFTMzQuNzMzLDM0LjEsMzQuOTQ4LDkuMjcyQzMyLjQ1Nyw4LjYzNiwyMi43LDUuOTA5LDE4LjIwOSwxLjc2MywxMy43MjMsNS45MDksMy45NjgsOC42MzYsMS40NzgsOS4yNzJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDAuMDExKSIvPjwvZz48L2c+PC9nPjwvc3ZnPg=="
+          />
+        </div>
+        <div class="rightLogoText">
+          <p>100%</p>
+          <p>SECURE PAYMENT</p>
+        </div>
+      </div>
+    </div>
+    <!-- EMPTY CART -->
+
+    <div id="empty">
+      <img class="eimg" src="./asset/emptycart.png" alt="cart is empty" />
+    </div>
+
+    <!-- PRODUCTS -->
+    <div id="cart" style="display: none">
+      <div id="show-products"></div>
+      <div class="promo">
+        <h2 id="price"></h2>
+
+        <p style="font-size: 16px">Apply promocode to get discount</p>
+        <input
+          required
+          id="input"
+          type="text"
+          minlength="7"
+          maxlength="7"
+          placeholder="example : PROMO10"
+        />
+
+        <button id="promobtn">Apply CODE</button>
+        <h2 id="dprice"></h2>
+      </div>
+    </div>
+
+    <div id="checkout" style="display: none">
+      <h2>Make payment to place your order</h2>
+
+      <button onclick="byUpi()">By UPI</button>
+      <button onclick="byCard()">By Card</button>
+
+      <div id="main" style="display: none">
+        <form id="myform" style="margin-top: 20px">
+          <label for="name">card holder name:</label>
+          <input type="text" name="name" id="name" required />
+
+          <label for="number">card number:</label>
+          <input
+            type="number"
+            name="card number"
+            id="card-number"
+            required
+            maxlength="16"
+          />
+
+          <label for="cvv">CVV:</label>
+          <input
+            type="text"
+            name="cvv"
+            id="cvv"
+            required
+            minlength="3"
+            maxlength="3"
+          />
+
+          <label for="exp">expiry date:</label>
+          <input type="date" name="exp" id="exp" required />
+
+          <input type="submit" />
+          <!-- //<button onclick="payment()">submit</button> -->
+        </form>
+      </div>
+    </div>
+    <script>
+      var data = JSON.parse(localStorage.getItem("mydata")); // collecting local storage data in variable
+
+      data.forEach((el) => {
+        //console.log(el.price * 75);
+        var div = document.createElement("div");
+        div.innerHTML = `
+                  <div id="myproduct" class="products" style="text-align:center; background:#F6F6F6; font-size: 18px;" >
+
+                      <img src="${
+                        el.image
+                      }" alt="" width="200px;" height="200px"> <br>
+                      <span> <span style="background:yellow;">₹ ${Math.floor(
+                        el.price * 75
+                      )}</span> <span style="margin-left:20px;"> MRP ₹ ${Math.floor(
+          el.price * 75 * 1.4
+        )}</span> </span> <br><br>
+              <span>Product ID: ${el.id}</span> <br>
+                      <span>${el.title}</span> <br>
+
+                      </div>
+               `; // getting data from local starage and showing it in cart's web page
+
+        document.getElementById("show-products").appendChild(div);
+
+        var price = [];
+        var h3 = document.getElementById("price");
+
+        data.forEach((el) => {
+          // getting price from local storage for all products
+          var pr = `${el.price * 75}`;
+          price.push(pr);
+        });
+        console.log(price);
+        var sum = price.reduce((el, ac) => {
+          // calculating sum
+          return el + Number(ac);
+        }, 0);
+        //console.log(sum);
+
+        h3.innerHTML = `your total cart value is ${Math.round(sum)} ₹`; // showing total sum of amount
+
+        var btn = document
+          .getElementById("promobtn")
+          .addEventListener("click", applyCoupon);
+
+        function applyCoupon() {
+          var input = document.getElementById("input").value;
+          var dprice = document.getElementById("dprice");
+          if (input.length == 7) {
+            // slicing to get number from input
+            var num = input.slice(5, 7);
+            //console.log(num);
+
+            discount = Math.round(sum - (sum * num) / 100); // calculating discount
+            console.log(discount);
+
+            document.getElementById(
+              "dprice"
+            ).innerHTML = `congratulations you got ${num}% discount, your final cart value is ${discount} ₹`;
+          } else {
+            // showing message if user enter wrong pin
+            document.getElementById(
+              "dprice"
+            ).innerHTML = `apply correct promo code, your final cart value is ${Math.round(
+              sum
+            )} ₹`;
+          }
+        }
+      });
+
+      //--------------CHECKOUT------------------
+
+      function byUpi() {
+        // added upi methode and shoen it's not working
+        alert("currently not working, please select card to make payment");
+      }
+      function byCard() {
+        //making payement sysytem
+        document.getElementById("main").style.display = "block";
+      }
+
+      function payment(el) {
+        el.preventDefault();
+        prompt("please enter your OTP");
+        alert("payment successful");
+      }
+
+      document.getElementById("myform").addEventListener("submit", payment);
+
+      // --------------- Toggle CONDITIONS--------------------
+      function show1() {
+        // toggling showing cart
+        document.getElementById("cart").style.display = "block";
+        document.getElementById("empty").style.display = "none";
+        document.getElementById("checkout").style.display = "none";
+      }
+      function show2() {
+        document.getElementById("cart").style.display = "none";
+        document.getElementById("empty").style.display = "block";
+        document.getElementById("checkout").style.display = "none";
+      }
+      function show3() {
+        //toggling showing pricing page
+        document.getElementById("cart").style.display = "none";
+        document.getElementById("empty").style.display = "none";
+        document.getElementById("checkout").style.display = "block";
+      }
+
+      //   if (filter.value == "cart") {
+      //     alert("working");
+      //     document.getElementById("cart").style.display = "block";
+      //     document.getElementById("empty").style.display = "none";
+      //     document.getElementById("checkout").style.display = "none";
+      //   } else if (filter.value == "payment") {
+      //     document.getElementById("cart").style.display = "none";
+      //     document.getElementById("empty").style.display = "none";
+      //     document.getElementById("checkout").style.display = "block";
+      //   } else if (filter.value == "null") {
+      //     document.getElementById("cart").style.display = "none";
+      //     document.getElementById("empty").style.display = "block";
+      //     document.getElementById("checkout").style.display = "none";
+      //   }
+    </script>
+  </body>
+</html>
