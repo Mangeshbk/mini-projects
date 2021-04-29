@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Popup</title>
+  <style>
+    body{
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f1f1f1;
+    }
+
+    .btn{
+      text-decoration: none;
+      padding: 15px 40px;
+      background-color: salmon;
+      color: #fff;
+      border-radius: 40px;
+      font-weight: bolder;
+      box-shadow: 0 10px 40px rgba(255, 122, 0, 0.4);
+    }
+
+    .video-container{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+      background-color: rgba(255, 122, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    .video-container .close{
+      position: absolute;
+      top: 10%;
+      right: 25px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .video-container video{
+      width: 90%;
+      max-width: 800px;
+      transform: scale(0);
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .video-container.show{
+      pointer-events: all;
+      opacity: 1;
+    }
+
+    .video-container.show video{
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+    <div class="model">
+      <a href="#" class="btn">watch video</a>
+
+      <div class="video-container">
+            <span class="close">&#10006</span>
+            <video src="./assets/004 Building Single-Page Applications (SPAs) with React.mp4" controls></video>
+      </div>
+    </div>
+
+
+    <script>
+      var btn = document.querySelector('.btn');
+      var videoContainer = document.querySelector('.video-container');
+      var closeVideo = document.querySelector('.close');
+      var video = document.querySelector('video')
+
+      // btn.addEventListener("click", ()=>{
+      //   videoContainer.classList.add("show")
+      // })
+
+      // closeVideo.addEventListener("click", ()=>{
+      //   videoContainer.classList.remove("show")
+      // })
+
+      btn.addEventListener('click', viewVideo)
+
+      function viewVideo(){
+        videoContainer.classList.add('show')
+        // console.log("on")
+      }
+
+      closeVideo.addEventListener('click', removeVideo);
+
+      function removeVideo(){
+        videoContainer.classList.remove('show')
+        video.pause()
+        // console.log("off")
+      }
+    </script>
+
+</body>
+
+</html>

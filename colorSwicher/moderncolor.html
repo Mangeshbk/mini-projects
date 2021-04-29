@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    />
+    <link rel="stylesheet" href="switch.css" />
+  </head>
+  <body>
+    <div class="all">
+      <div class="main">
+        <h1 class="first">COLOR SWITCHER</h1>
+        <h3 class="second">SELECT YOUR FAV COLOR</h3>
+      </div>
+
+      <div class="choose">
+        <div class="colors active">
+          <div class="theme">
+            <ul class="themes-colors">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+        <span class="themes-btn active"
+          ><i class="fas fa-cog fa-lg fa-spin"></i
+        ></span>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("span").click(function () {
+          $(".colors, span").toggleClass("active");
+        });
+
+        $("ul.themes-colors li").click(function () {
+          $("body").css("background", $(this).css("color"));
+        });
+
+        $("ul.text-colors li").click(function () {
+          $("h3, h1").css("color", $(this).css("color"));
+        });
+      });
+    </script>
+  </body>
+</html>
