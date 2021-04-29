@@ -1,0 +1,101 @@
+/*--------------------------------------------------------------
+# NavBar
+--------------------------------------------------------------*/
+.nav {
+  width: 100vw;
+  height: 12vh;
+  background: #36393f;
+  left: 0;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 997;
+  position: sticky;
+  display: flex;
+  gap: 2%;
+  align-items: center;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.377);
+}
+
+.nav-menu {
+  width: auto;
+  height: 6vh;
+}
+
+.nav-menu-item {
+  color: #afb1b4;
+}
+.nav-menu:hover a {
+  color: #f9f9f9;
+  cursor: pointer;
+}
+
+.nav-menu-item a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #afb1b4;
+}
+
+.nav-menu-border1,
+  .nav-menu-border2,
+  .nav-menu-border3
+  /* .nav-menu-border4  */ {
+  width: 0%;
+  height: 2px;
+  margin-top: 1vh;
+  position: absolute;
+  transition: all 500ms ease-in-out;
+  transform: scaleX(0);
+  background: #7289da;
+}
+
+.nav-menu:hover .nav-menu-border1,
+.nav-menu:hover .nav-menu-border2 {
+  width: 3%;
+  transform: scaleX(1);
+}
+
+.nav-menu:hover .nav-menu-border3 {
+  width: 3.7%;
+  transform: scaleX(1);
+}
+
+.nav-menu:hover .nav-menu-border4 {
+  width: 6.4%;
+  transform: scaleX(1);
+}
+.nav-menu-item > button {
+  background: #7289da;
+  color: #f9f9f9;
+  padding: 4px 0;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.nav-menu-item > button:hover {
+  background: transparent;
+  border: 1px solid #7289da;
+}
+.logo {
+  display: flex;
+  gap: 2%;
+  align-items: center;
+  margin: auto 50% auto 2%;
+  cursor: pointer;
+}
+.logo > h2 {
+  color: #f9f9f9;
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    display: flex;
+    gap: 2%;
+    align-items: center;
+    margin: auto 10% auto 2%;
+    cursor: pointer;
+  }
+}

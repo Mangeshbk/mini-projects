@@ -1,0 +1,131 @@
+/* feedback */
+#feedback {
+  max-height: 50px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vh;
+  padding: 15px;
+  background: #43b581;
+  border-radius: 7px;
+  transition: 50px 50px 2000ms;
+}
+
+#feedback a {
+  display: flex;
+  gap: 15px;
+  text-decoration: none;
+  color: black;
+}
+
+#feedback a i {
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+#feedback a h3 {
+  display: none;
+  margin-top: -1px;
+}
+
+#feedback:hover h3 {
+  display: block;
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  width: 100vw;
+  background: #36393f;
+  padding: 0 0 25px 0;
+  color: #eee;
+  font-size: 14px;
+}
+
+#footer .footer-top {
+  background: #23273a;
+  padding: 60px 0 30px 0;
+}
+
+.row {
+  display: flex;
+}
+
+.footer-info-logo {
+  display: flex;
+  gap: 5%;
+  align-items: center;
+  margin: auto auto auto 10%;
+}
+
+.footer-info-logo:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+#footer .footer-top .footer-info {
+  margin-bottom: 30px;
+  width: 30%;
+  margin: auto auto 4% 10%;
+  /* border: 1px solid red; */
+}
+
+#footer .footer-top .footer-info p {
+  line-height: 25px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.footer-contact {
+  margin: auto 20% 6% auto;
+}
+
+.footer-contact p {
+  font-size: 17px;
+  margin-top: 10px;
+  font-weight: lighter;
+}
+
+#footer .footer-top .social-links a {
+  display: inline-block;
+  background: #36393f;
+  color: #eee;
+  line-height: 0;
+  margin-right: 4px;
+  margin-top: 10px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+  /* display: inline-flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+#footer .footer-top .social-links a i {
+  line-height: 0;
+  font-size: 20px;
+  margin: 20px 0 0 10px;
+}
+
+#footer .footer-top .social-links a:hover {
+  background: #7289da;
+  color: #f9f9f9;
+}
+
+#footer .footer-top h4 {
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #7289da;
+}
+
+#footer .copyright {
+  text-align: center;
+  padding-top: 30px;
+  font-size: 17px;
+}
