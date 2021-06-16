@@ -930,8 +930,8 @@
     <!-- CATEGORY PART -->
 
     <div class="category">
-      <div id="cate1" data-id="men"></div>
-      <div id="cate2" data-id="women"></div>
+      <div id="cate1" data-id="men's clothing"></div>
+      <div id="cate2" data-id="women's clothing"></div>
       <div id="cate3" data-id="electronics"></div>
       <div id="cate4" data-id="jewelery"></div>
     </div>
@@ -956,7 +956,7 @@
 
       //  Products data
       let products = null; // initially no products
-      let query = "men";
+      let query = "men's clothing";
       categories.addEventListener("click", (e) => {
         const { dataset } = e.target;
         query = dataset.id; //getting data-id
@@ -969,7 +969,7 @@
           var req = await (
             await fetch(
               `https://fakestoreapi.com/products/category/${
-                query + (query == "men" || query == "women" ? " clothing" : "")
+                query + (query == "men's%20clothing" || query == "women's%20clothing" ? " clothing" : "")
               } ` //query is passing as per data-id, and clothing is using only in men and womens conditions.
             )
           ).json(); // fetching data of women clothing from api
